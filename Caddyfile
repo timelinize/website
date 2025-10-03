@@ -1,0 +1,20 @@
+localhost
+
+root src
+
+file_server
+encode zstd gzip
+
+handle_path /docs-direct/docs/* {
+	root src/docs/markdown
+	try_files {path}.md {path}
+}
+handle {
+	rewrite /docs/* /docs/index.html
+	try_files {path}.html {path}
+	templates
+}
+
+handle_errors {
+	respond "{err.status_code} {err.status_text}"
+}

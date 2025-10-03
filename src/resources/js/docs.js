@@ -1,0 +1,136 @@
+ready(function() {
+	// highlight current page in left nav
+	let currentPageLink = $('main nav a[href="'+window.location.pathname+'"]');
+	if (window.location.pathname.startsWith("/docs/json/")) {
+		// as a special case, highlight the JSON structure link anywhere within it
+		currentPageLink = $('main nav a[href="/docs/json/"]');
+	}
+	if (window.location.pathname.startsWith("/docs/modules/")) {
+		// as another special case, highlight the modules link anywhere within it
+		currentPageLink = $('main nav a[href="/docs/modules/"]');
+	}
+	currentPageLink?.classList?.add('current');
+
+	// generate in-page nav before adding anchor links to headings;
+	// only show sidebar if there are any navigable headers
+	// TODO: support h3 too
+	const spacingMS = 50;
+	let delay = spacingMS;
+	const h2elems = $$('main article h2');
+	if (h2elems.length) {
+		$('#pagenav .heading').style.display = 'block';
+		h2elems.forEach(elem => {
+			const a = document.createElement('a');
+			a.innerText = elem.innerText;
+			a.href = `#${elem.id}`;
+			setTimeout(function() {
+				$('#pagenav').append(a);
+			}, delay);
+			delay += spacingMS;
+		});
+	}
+
+	// add anchor links, inspired by https://github.com/bryanbraun/anchorjs
+	$$('article > h2[id], article > h3[id], article > h4[id], article > h5[id], article > h6[id]').forEach(function(elem) {
+		const anchor = document.createElement('a');
+		anchor.href = `#${elem.id}`;
+		anchor.classList.add('anchor-link');
+		anchor.title = "Link to this section";
+		anchor.innerText = '🔗';
+		elem.append(anchor);
+	});
+
+	const autonav = $('#autonav');
+
+	// when a left-side-nav-link is hovered, show the in-page nav in a popout to the side
+	on('mouseover', 'main nav li a:not(#autonav a)', async e => {
+		// only show the pop-out nav if not on mobile/narrow screen
+		if ($('#docs-menu').offsetParent != null) {
+			return;
+		}
+
+		// TODO: needs to get the raw markdown... need to by pass Caddy's markdown rendering
+		const response = await fetch("/docs-direct" + e.target.getAttribute('href'));
+		const markdown = await response.text();
+		const tokens = marked.lexer(markdown);
+
+		// empty the container
+		autonav.replaceChildren();
+		
+		let seenH1 = false;
+		for (const tkn of tokens) {
+			if (tkn.type != "heading") continue;
+			if (tkn.depth == 1) {
+				seenH1 = true;
+			}
+			if (!seenH1 || tkn.depth != 2) continue;
+
+			// this includes HTML entities like &lt; (i.e. not user-facing text), but
+			// that's how the server-side markdown renderer does it too ¯\_(ツ)_/¯
+			const anchor = anchorID(tkn.text);
+
+			const a = document.createElement('a');
+			a.classList.add('autonav-link');
+			a.innerHTML = marked.parseInline(tkn.text);
+			a.href = `${e.target.href}#${anchor}`;
+			autonav.append(a);
+		}
+		
+		if ($('#autonav *')) {
+			const sections = document.createElement('div')
+			sections.classList.add('heading');
+			sections.innerText = 'Sections';
+			autonav.prepend(sections);
+			e.target.closest('li').append(autonav);
+			autonav.style.display = ''; // unhide the container
+		} else {
+			// no links; hide the container so we don't see an empty box
+			autonav.style.display = 'none';
+		}
+
+	});
+});
+
+// toggle left-nav when menu link is clicked
+on('click', '#docs-menu', e => {
+	const nav = $('#docs-menu-container');
+	if (!nav.offsetHeight) {
+		nav.style.height = `${nav.scrollHeight}px`;
+	} else {
+		nav.style.height = 0;
+	}
+});
+
+function anchorID(text) {
+	return text.trim().toLowerCase().replace(/\s/g, '-').replace(/[^\w-]/g, '');
+}
+
+on('click', '.expander-toggle', e => {
+	const target = e.target.closest('.expander-toggle').nextElementSibling;
+
+	// scrollHeight maintains the true height of the content even when it overflows its container,
+	// i.e. it is not affected by height: 0; store this value with the element so we can restore
+	// it when opening, to smoothly animate to its true height
+	target.contentHeight = target.scrollHeight;
+
+	if (target.classList.contains('open')) {
+		// expander is open; close it
+
+		// set the height property so transition can be smoothly animated from start height
+		target.style.height = target.contentHeight + "px";
+
+		// we can't simultaneously remove the class because that has the final
+		// effect of setting height to 0 (CSS changes from a JS function are
+		// batched until the function returns), so we need to first make sure
+		// the starting height value is set, then asynchronously we can remove
+		// the class to start the transition
+		setTimeout(function() {
+			target.classList.remove('open');
+		}, 1);
+	} else {
+		// expander is closed; open it
+
+		// this overwrites the height with 0
+		target.classList.add('open');
+	}
+});

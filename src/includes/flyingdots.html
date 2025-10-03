@@ -1,0 +1,19 @@
+<!-- doodle modified from https://yuanchuan.dev/time-based-css-animations -->
+<css-doodle>
+	<style>
+		/* bigger grid means more dots */
+		@grid: 50x1 / 100% 100% / transparent;
+		@size: @rn(5px, 45px, 5); /* @rn(1vmin, 5vmin, 10); */
+		border-radius: 50%;
+		margin: auto;
+		background: @p(hsl(@t(/20, +@i(*2), %360), 90%, 80%));
+		box-shadow: @m5(@r(±50vmin) @r(±50vmin) @r(2vmin) @r(-10px) @p);
+		translate: @M2(
+			/* 
+				@i: Argument is how random/spread the dots are: 1 = line, no movement
+				@t: First argument changes speed; lower = faster
+			*/
+			calc(100px * tan(6*cos(@t(/350, +@i(*10), /6, %360deg))))
+		);
+	</style>
+</css-doodle>

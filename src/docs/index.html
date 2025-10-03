@@ -1,0 +1,88 @@
+{{$pathParts := splitList "/" .OriginalReq.URL.Path}}
+{{$markdownFilename := default "index" (slice $pathParts 2 | join "/")}}
+{{$markdownFilePath := printf "/docs/markdown/%s.md" $markdownFilename}}
+{{if not (fileExists $markdownFilePath)}}{{httpError 404}}{{end}}
+{{$markdownFile := (include $markdownFilePath | splitFrontMatter)}}
+{{$title := default $markdownFilename $markdownFile.Meta.title}}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{{$title}} - Timelinize</title>
+		{{include "/includes/head.html"}}
+		<link rel="stylesheet" href="/resources/css/docs.css">
+		<script src="/resources/js/marked.min.js"></script>
+		<script src="/resources/js/docs.js"></script>
+	</head>
+	<body>
+		{{include "/includes/header.html"}}
+
+		<div id="autonav"></div>
+
+		<main>
+			<div class="docs wrapper">
+				<nav>
+					<div id="docs-menu">
+						<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-menu-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+							<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+							<path d="M4 6l16 0"></path>
+							<path d="M4 12l16 0"></path>
+							<path d="M4 18l16 0"></path>
+						</svg>
+						Pages
+					</div>
+					<div id="docs-menu-container">
+						<ul>
+							<li class="heading">Get Started</li>
+							<li><a href="/docs/data-preparation">Prepare data</a></li>
+							<li><a href="/docs/install">Install</a></li>
+							<li><a href="/docs/tutorial">Tutorial</a></li>
+						</ul>
+
+						<ul>
+							<li class="heading">Functionality</li>
+							<li><a href="/docs/importing-data">Importing data</a></li>
+						</ul>
+						
+						<ul>
+							<li class="heading">Data Sources</li>
+							<li><a href="/docs/data-sources/android-text-messages">Android Text Messages</a></li>
+							<li><a href="/docs/data-sources/apple-messages">Apple Messages</a></li>
+							<li><a href="/docs/data-sources/apple-photos">Apple Photos</a></li>
+							<li><a href="/docs/data-sources/calendars">Calendars</a></li>
+							<li><a href="/docs/data-sources/contact-list">Contact list</a></li>
+							<li><a href="/docs/data-sources/emails">Emails</a></li>
+							<li><a href="/docs/data-sources/facebook">Facebook</a></li>
+							<!-- <li><a href="/docs/data-sources/generic">Generic</a></li> -->
+							<li><a href="/docs/data-sources/geojson">GeoJSON files</a></li>
+							<li><a href="/docs/data-sources/google-location-history">Google Location History</a></li>
+							<li><a href="/docs/data-sources/google-photos">Google Photos</a></li>
+							<li><a href="/docs/data-sources/google-voice">Google Voice</a></li>
+							<li><a href="/docs/data-sources/gpx">GPX files</a></li>
+							<li><a href="/docs/data-sources/icloud">iCloud</a></li>
+							<li><a href="/docs/data-sources/iphone">iPhone</a></li>
+							<li><a href="/docs/data-sources/instagram">Instagram</a></li>
+							<li><a href="/docs/data-sources/kml-gx">KML-gx files</a></li>
+							<li><a href="/docs/data-sources/media">Media</a></li>
+							<li><a href="/docs/data-sources/nmea">NMEA files</a></li>
+							<li><a href="/docs/data-sources/strava">Strava</a></li>
+							<li><a href="/docs/data-sources/telegram">Telegram</a></li>
+							<li><a href="/docs/data-sources/vcard">vCard contacts</a></li>
+							<li><a href="/docs/data-sources/x">X (Twitter)</a></li>
+						</ul>
+					</div>
+				</nav>
+
+				<article>
+					{{markdown $markdownFile.Body}}
+				</article>
+
+				<nav id="pagenav">
+					<div class="heading">On this page</div>
+				</nav>
+			</div>
+		</main>
+
+		{{include "/includes/footer.html"}}
+
+	</body>
+</html>
