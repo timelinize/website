@@ -166,10 +166,10 @@ Metadata embedded as EXIF or XMP is extracted and saved along with each item. Me
 Live photos (i.e. motion pictures, small videos associated with a photograph) are supported from:
 
 - Google Photos ("MVIMG" and "MP" JPEGs)
-- Apple (.HEIC + .MP4)
+- Apple (.HEIC + .MOV/.MP4)
 - Samsung (JPEG)
 
-If the live photo is a sidecar file (Apple's .HEIC + MP4), it will be imported as a separate item with a relation linking it to the main photo. If the live photo is embedded, it remains embedded as a single item. In both cases, the motion photo can play in the UI the same way.
+If the live photo is a sidecar file (Apple's HEIC + MOV/MP4), it will be imported as a separate item with a relation linking it to the main photo, if it's in the same folder. If the live photo is embedded into the image file, the image is simply imported as a single item. In both cases, the motion photo can play in the UI the same way.
 
 Sidecar .xmp files are not yet supported, but it's planned.
 

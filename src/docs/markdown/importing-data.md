@@ -45,7 +45,7 @@ There is one known edge case that has been observed on macOS: a dependency calle
 
 Timelinize adopts a single-user model, mainly because the application is self-hosted and whomever administers it always has full access to all of the data.\* As such, it is up to you to protect your timeline data. For example, you could encrypt your hard drive if you're worried about losing physical control of it. Timelinize does set restrictive permissions on data files so that only the current OS user can access them, but this will not stop someone who boots into a live OS image or has admin privileges on your computer.
 
-_\* We could employ some sort of complex homomorphic encryption scheme, with unrecoverable private keys for each user, but this would not only be volatile to data loss, it is also very technically difficult to securely share and de-duplicate encrypted data. Due to encryption's complexity, and the self-hotsed nature of the project, we're not even going there._
+_\* We could employ some sort of complex homomorphic encryption scheme, with unrecoverable private keys for each user, but this would not only be volatile to data loss, it is also very technically difficult to securely share and de-duplicate encrypted data. Due to encryption's complexity and the self-hosted nature of the project, we're not even going there._
 
 
 ### How long do imports take?
@@ -61,7 +61,7 @@ I've put a fair amount of effort throughout the years to optimize Timelinize's i
 
 Ensure your storage devices have fast read and write speeds, fast data interfaces (NVME, USB 3.1 Gen2 or newer; PCIe 5.x or newer, etc.), and sufficient thermal management.
 
-A modern GPU will help a lot for quickly generating thumbnails and transcoding videos (but this typically happens after the import completes).
+A modern GPU will help a lot for quickly generating thumbnails and transcoding videos (but this typically happens after the import completes). 40-series or newer NVIDIA GPUs support codecs for more efficient thumbnails.
 
 Modern Macs with Apple Silicon, especially the last few generations of chips, will also be blazing fast.
 
