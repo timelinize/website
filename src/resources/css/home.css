@@ -152,7 +152,7 @@ a.cell:hover {
 	margin-top: 4em;
 }
 
-.button {
+section .button {
 	padding: .75em 3em;
 	display: inline-block;
 	background: linear-gradient(180deg, rgb(245 251 255) 0%, rgba(255, 255, 255, 1) 50%, rgb(165 192 213) 100%);
@@ -164,12 +164,12 @@ a.cell:hover {
 	transition: all .25s;
 }
 
-.button:hover {
+section .button:hover {
 	transform: scale(1.05);
 	box-shadow: 0 10px 50px rgb(49 165 225);
 }
 
-.button:active {
+section .button:active {
 	transform: scale(0.97) translateY(5px);
 	box-shadow: 0 0 30px 5px rgb(30 160 199);
 }
@@ -202,8 +202,7 @@ section.darkbg {
 }
 
 section.lightbg {
-	/* background: linear-gradient(#a6c8e2, #dde1e4); */
-	background: radial-gradient(300% 2000px at top, #a6c8e2 0%, white 30%)
+	background: radial-gradient(150% 2000px at top, #a6c8e2 0%, white 30%)
 }
 
 section.lightbg,
@@ -291,6 +290,15 @@ h3 svg {
 .notice-text {
 	flex: 1;
 }
+
+footer {
+	padding: 0 100px 2em;
+	text-align: center;
+}
+
+
+
+
 
 @media(max-width: 1200px) {
 	.quad {

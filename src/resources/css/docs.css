@@ -82,30 +82,16 @@ body {
 	max-width: 1800px;
 }
 
-button,
-.button {
+button:not(nav .primary),
+.button:not(nav .primary) {
 	color: var(--button-color);
 	border: 2px solid var(--button-border-color);
 }
-button:hover,
-.button:hover {
+button:not(nav .primary):hover,
+.button:not(nav .primary):hover {
 	color: var(--button-color-hover);
 	border-color: var(--button-border-color-hover);
 }
-button.primary,
-.button.primary {
-	background: linear-gradient(135deg, #7ece98 25%, rgb(49, 155, 208) 80%);
-	color: white;
-	border: none;
-}
-button.primary:hover,
-.button.primary:hover {
-	color: white;
-}
-.button.purple:hover {
-	border: none;
-}
-
 
 main {
 	margin-top: 80px;
