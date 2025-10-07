@@ -120,18 +120,20 @@ header img {
 
 header nav {
 	width: 100%;
-	height: 60px;
+	/* height: 60px; */
 	position: relative;
 	z-index: 3;
 	border-bottom: 1px solid #5192c426;
 	display: flex;
 	align-items: stretch;
+	flex-wrap: wrap;
+	row-gap: 1em;
 }
 
 header nav > *,
 header nav .right-side > * {
 	margin: 0 1em;
-	padding: 1em 0;
+	padding: 5px 0;
 	display: flex;
 	align-items: center;
 }
@@ -197,12 +199,17 @@ h2 {
 	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
+.primary-container {
+	display: revert !important;
+}
+
 .primary,
 .primary:hover {
 	color: white;
 }
 
 .primary {
+	display: inline-block;
 	background: linear-gradient(135deg, #609ad2 25%, rgb(27 78 104) 80%);
 	padding: 8px 1em;
 }

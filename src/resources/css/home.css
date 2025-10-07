@@ -140,16 +140,22 @@ a.cell:hover {
 	margin-top: -450px;
 }
 
-.hero-screenshot {
+.hero-screencast {
 	border-radius: 10px;
-	max-width: 100%;
+	width: 100%;
 	box-shadow: 0px -20px 75px rgb(115 178 248 / .5);
 	transform: rotateX(-5deg);
+	aspect-ratio: 16 / 9;
 }
 
 .cta {
 	text-align: center;
 	margin-top: 4em;
+	font-size: 20px;
+}
+
+.cta .button {
+	margin-bottom: .5em;
 }
 
 section .button {
@@ -176,10 +182,6 @@ section .button:active {
 
 section {
 	padding: 200px 0;
-}
-
-.hero + section {
-	padding-top: 100px;
 }
 
 section .wrapper {
@@ -291,11 +293,21 @@ h3 svg {
 	flex: 1;
 }
 
+
+
+.tour-video {
+	width: 100%;
+	max-width: 1200px;
+	aspect-ratio: 16 / 9;
+	display: block;
+	margin: 0 auto;
+}
+
+
 footer {
 	padding: 0 100px 2em;
 	text-align: center;
 }
-
 
 
 
@@ -331,5 +343,23 @@ footer {
 	}
 	.quad {
 		grid-template-columns: 1fr;
+	}
+	header nav .right-side {
+		margin-left: 0;
+	}
+	.hide-narrow-1 {
+		display: none;
+	}
+}
+
+@media(max-width: 600px) {
+	h1 {
+		font-size: 65px;
+	}
+	h2 {
+		font-size: 50px;
+	}
+	.hide-narrow-2 {
+		display: none;
 	}
 }
