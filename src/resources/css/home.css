@@ -344,12 +344,6 @@ footer {
 	.quad {
 		grid-template-columns: 1fr;
 	}
-	header nav .right-side {
-		margin-left: 0;
-	}
-	.hide-narrow-1 {
-		display: none;
-	}
 }
 
 @media(max-width: 600px) {
@@ -358,8 +352,5 @@ footer {
 	}
 	h2 {
 		font-size: 50px;
-	}
-	.hide-narrow-2 {
-		display: none;
 	}
 }
