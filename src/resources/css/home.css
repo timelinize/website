@@ -344,6 +344,17 @@ footer {
 	.quad {
 		grid-template-columns: 1fr;
 	}
+	.cells {
+		--dimension: 125px;
+		font-size: 14px;
+	}
+	.cell {
+		padding: 10px;
+	}
+	.cell svg {
+		width: 35px;
+		height: 35px;
+	}
 }
 
 @media(max-width: 600px) {
