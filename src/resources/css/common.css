@@ -110,7 +110,7 @@ header {
 .blur::before {
 	backdrop-filter: blur(10px);
 	-webkit-backdrop-filter: blur(10px);
-	background: linear-gradient(to bottom, rgb(0 48 78 / 90%), transparent 120%);
+	background: linear-gradient(to bottom, rgb(0 48 78 / 90%), transparent);
 	mask-image: linear-gradient(to bottom, black 60px, transparent);
 }
 

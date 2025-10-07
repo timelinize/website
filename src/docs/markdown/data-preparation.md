@@ -7,9 +7,9 @@ Data preparation
 
 The first thing you should do is acquire your data, even before you install Timelinize. It's helpful to gather it all on your computer or [NAS](https://en.wikipedia.org/wiki/Network-attached_storage) before you begin.
 
-- **Start this process as soon as possible.** Aside from having a copy of your data as a backup, some sites/services take up to a week to procure your download files.
+- **Start this process as soon as possible.** Some sites/services take up to a week to procure your download files.
 
-- **The more data sources you add to Timelinize, the better it gets.** Ideally, add all the data you have from as many data sources that Timelinize supports.
+- **The more data sources you add to Timelinize, the better it gets.** Add all the data you have from as many data sources as you can.
 
 - **Keep your original data** even after importing into Timelinize. While Timelinize is in development, it is unstable and you may have to start over. Please be sure to keep your original data backed up.
 
