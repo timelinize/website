@@ -68,7 +68,7 @@ function setTheme(theme) {
 		theme = "system";
 	}
 	localStorage.setItem("theme", theme);
-	ready(function() { $('#current-theme').innerText = theme; });
+	ready(function() { $('#current-theme span').innerText = theme; });
 	let lightOrDarkTheme = theme;
 	if (lightOrDarkTheme == "system") {
 		lightOrDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light";	
