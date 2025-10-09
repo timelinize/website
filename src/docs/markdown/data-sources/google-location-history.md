@@ -64,7 +64,10 @@ Expected format
 
 Timelinize supports both the legacy location history format (from Takeout, pre-2025), and the current on-device export format. It should remain its original archive file, or it may be extracted as long as its folder structure is preserved.
 
-The on-device location history file must keep its original filename, or at least contain the string "location-history" and end in ".json". (I've since learned this is locale-dependent, so until we fix this, you will need to rename your file to `location-history.json`, sorry...)
+For on-device exports, the filename matters so that the import planner doesn't have to open and parse every JSON file it encounters. Leave the filename unchanged; or, you can add to it, but don't remove anything from the original name. For example, if your filename was `Timeline.json`, you can change it to `Timeline 2024-09-15.json`, but don't change the extension or remove "Timeline".
+
+Filenames may vary by locale/language; not all languages are supported yet, but many common ones are. Please [file an issue](https://github.com/timelinize/timelinize/issues/new) if your file is not recognized by the import planner, and we will add your language.
+
 
 Options
 -------
