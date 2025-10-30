@@ -90,16 +90,21 @@ Then be sure to follow the instructions below to run it.
 	<pre><code class="cmd"><span class="bash">curl https://webi.sh/ffmpeg | sh</span></code></pre>
 4. Install [uv](https://docs.astral.sh/uv/):
 	<pre><code class="cmd"><span class="bash">curl -LsSf https://astral.sh/uv/install.sh | sh</span></code></pre>
-5. Download Timelinize (see above).
-6. Extract the program, and make sure it is executable: `chmod +x ./timelinize`
-7. Run the program from the Terminal (for logs). We are not yet code-signed, so you will have to override built-in OS protections:
-	Follow [these instructions](https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unidentified-developer-mh40616/mac) to run apps from unidentified developers (that's me!). If the error you get says that Timelinize "is damaged," that's a lie: checksums probably match; the real problem is that Apple has placed it in "quarantine" because it was downloaded.
-	You can either:
-	- Do a **two-finger** click and select **Open**, twice (once for the warning, the second time to open it)
+5. Download Timelinize (see above) and extract the archive to expose the binary.
+6. We are not yet code-signed, so you will have to override the OS to run the app: follow [these instructions](https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unidentified-developer-mh40616/mac) to run apps from unidentified developers (that's me!).
+
+### Additional steps
+
+Mac has a whole extra layer of kernel-level protections that go beyond posix-style file permissions, users, and groups, that will likely require additional steps:
+
+7. If you get an error that says Timelinize "is damaged," that's a lie: the checksums probably match; the real problem is that Apple has placed it in "quarantine" because it was downloaded. You can either:
+	- Do a **two-finger** ("right") click and select **Open**, twice (once for the warning, the second time to open it)
 	- Or, open Terminal and run this command:
 		<pre><code class="cmd"><span class="bash">xattr -d com.apple.quarantine ~/Downloads/timelinize</span></code></pre>
 		(adjust path as needed).
-	It should finally run, but if you can't open or create a timeline, Apple may be blocking access to your disk. The easiest way around this is to give Timelinize "Full Disk Access" in System Settings (or at least access to folders you'll be using).
+8. If you get errors when opening or creating a timeline, when planning an import, or right after an import starts, Apple is likely blocking access to your files (especially if the error is something like "operation not permitted"). The easiest way around this is to give Terminal explicit access in Settings -> Privacy & Security. For access to everything, find "Full Disk Access" and add/enable Terminal:
+	![Full Disk Access for Terminal](/resources/images/docs/full-disk-access.png)
+	If you prefer, you can be more selective about what you grant access to by selecting more specific data instead, such as Photos, Contacts, or Files & Folders. Remember to grant it for Terminal, since Timelinize runs in the Terminal.
 
 </div>
 </div>
